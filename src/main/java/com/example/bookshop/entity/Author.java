@@ -21,7 +21,8 @@ public class Author {
 
     @OneToMany(mappedBy = "author",
     cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Book> books = new ArrayList<>();
+    private List<Book> books =
+            new ArrayList<>();
 
     public Author(String authorName, String email) {
         this.authorName = authorName;

@@ -146,9 +146,6 @@ public class BookShopApplication {
             authorDao.save(author1);
             authorDao.save(author2);
 
-
-
-
         };
     }
 

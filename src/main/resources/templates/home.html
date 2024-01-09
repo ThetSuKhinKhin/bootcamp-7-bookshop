@@ -4,9 +4,171 @@
 
 <body>
 <main role="main">
-    <div class="container">
-        <h1 class="mt-5 text-center display-3 text-info">Hello</h1>
+    <div class="container-fluid bg-light">
+        <div class="container p-5">
+            <section class="mt-4">
+                <h3 class="text-center p-5"><i>BestSellers</i></h3>
+                <div class="row">
+
+                    <!--<div class="col-md-4">
+                        <div class="card shadow" style="width: 18rem;height: 26rem">
+                            <img th:src="${books.get(0).imgUrl}" class="card-img-top" alt="">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${books.get(0).title}"></h5>
+                                <p class="lead">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, nihil.
+                                </p>
+                                <div class="d-flex justify-content-between">
+                                    <span class="lead text-muted" th:text="${'$' + books.get(0).price}"></span>
+                                    <button class="btn btn-sm btn-primary">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+
+                    <div class="col">
+                        <div class="card shadow">
+                            <img th:src="${books.get(3).imgUrl}" class="card-img-top" alt="">
+                            <div class="card-body text-center">
+                                <h5 class="card-title" th:text="${books.get(3).title}"></h5>
+                                <p class="lead">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, nihil.
+                                </p>
+                                    <button class="btn btn-lg btn-outline-primary px-3 rounded">Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col">
+                        <div class="card shadow">
+                            <img th:src="${books.get(5).imgUrl}" class="card-img-top" alt="">
+                            <div class="card-body text-center">
+                                <h5 class="card-title" th:text="${books.get(5).title}"></h5>
+                                <p class="lead">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, nihil.
+                                </p>
+                                <button class="btn btn-lg btn-outline-primary px-3 rounded">Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div class="col">
+                        <div class="card shadow">
+                            <img th:src="${books.get(5).imgUrl}" class="card-img-top" alt="">
+                            <div class="card-body text-center">
+                                <h5 class="card-title" th:text="${books.get(5).title}"></h5>
+                                <p class="lead">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, nihil.
+                                </p>
+                                    <button class="btn-lg btn-outline-primary px-3 rounded">Details</button>
+                            </div>
+                        </div>
+                    </div>-->
+
+                </div>
+            </section>
+
+            <section id="quotes">
+                <div class="container text-center mt-4 p-5">
+                    <h3 class="my-4">WHAT OUR READERS ARE SAYING</h3>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <i class="fas fa-quote-left fa-2x text-primary mb-3"></i>
+                            <blockquote class="blockquote">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, nihil!</p>
+                                <footer class="blockquote-footer">James Servley</footer>
+                            </blockquote>
+                        </div>
+
+                        <div class="col-md-4">
+                            <i class="fas fa-quote-left fa-2x text-primary mb-3"></i>
+                            <blockquote class="blockquote">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, nihil!</p>
+                                <footer class="blockquote-footer">James Servley</footer>
+                            </blockquote>
+                        </div>
+
+                        <div class="col-md-4">
+                            <i class="fas fa-quote-left fa-2x text-primary mb-3"></i>
+                            <blockquote class="blockquote">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, nihil!</p>
+                                <footer class="blockquote-footer">James Servley</footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section>
+                <div class="container text-center mt-4">
+                    <h1>WHAT OTHERS ARE SAYING</h1>
+                    <div class="row">
+                        <div class="col-md-3" th:each="book : ${books}">
+                            <div class="card mb-3">
+                                <img th:src="${book.imgUrl}" class="img-thumbnail" alt="">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="container text-center mt-4">
+                    <i class="fas fa-quote-left fa-2x text-primary mb-3"></i>
+                    <blockquote class="blockquote">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem dolor nobis possimus soluta sunt! Accusamus accusantium asperiores commodi culpa, explicabo fugiat in iste, iure iusto mollitia nisi officia recusandae, vero.
+                        <footer class="blockquote-footer mt-3">Richard Chan</footer>
+                    </blockquote>
+                </div>
+            </section>
+
+        </div>
+
     </div>
+
+    <section class="bg-dark text-white container-fluid">
+        <div class="container text-center p-5">
+            <h3>JOIN OUR NEW BUYERS FOR DEALS AND UPDATE AND OFFERS</h3>
+            <div class="row justify-content-center">
+                <div class="col-10 col-sm-8 col-md-6 col-lg-4">
+                    <form action="#">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control">
+                            <button class="btn btn-success input-group-text">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="footer" class="bg-secondary p-4 text-white">
+        <ul class="nav text-center justify-content-center flex-column flex-sm-row">
+            <li class="nav-item">
+                <a href="#" class="nav-link">FAQ</a>
+            </li>
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">EXPERIENCE</a>
+            </li>
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">CONTACT</a>
+            </li>
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">BOOK NOW</a>
+            </li>
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">EXPLORE</a>
+            </li>
+        </ul>
+    </section>
+
 </main>
 </body>
 </html>

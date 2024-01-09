@@ -55,5 +55,6 @@ public class Book {
         this.description = description;
         this.price = price;
         this.stock = stock;
+        this.imgUrl = imgUrl;
     }
 }
