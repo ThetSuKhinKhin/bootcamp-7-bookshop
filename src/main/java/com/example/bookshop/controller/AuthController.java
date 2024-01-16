@@ -5,6 +5,7 @@ import com.example.bookshop.entity.Order;
 import com.example.bookshop.entity.PaymentMethod;
 import com.example.bookshop.service.AuthService;
 import com.example.bookshop.service.CartService;
+import com.example.bookshop.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,21 +15,32 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
+import java.util.Objects;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/auth")
+//@RequestMapping("/auth")
 public class AuthController {
 
     private final AuthService authService;
     private final CartService cartService;
+    private final CustomerService customerService;
 
     @RequestMapping("/register")
     public String register(Model model) {
         model.addAttribute("customer", new Customer());
         return "register";
     }
+
+    @GetMapping("/login-error")
+    public String loginError(Model model) {
+        model.addAttribute("loginError", true);
+        return "login";
+    }
+
     //you can see order Class
+    //public Order(LocalDate orderDate, String billingAddress, String shippingAddress, PaymentMethod paymentMethod, double totalAmount) {
     @PostMapping("/save-customer")
     public String saveCustomer(@RequestParam("billingAddress")String billingAddress,
                                @RequestParam("shippingAddress")String shippingAddress,
@@ -53,7 +65,7 @@ public class AuthController {
 
         authService.register(customer, order);
         this.customer = customer;
-        return "redirect:/auth/info";
+        return "redirect:/info";
     }
 
     private Customer customer; //trick way -> customer order to order item
@@ -61,7 +73,7 @@ public class AuthController {
 
     /*@GetMapping("/info")//Model = ModelMap = Map are the same
     public String checkoutInfo(Map map, @ModelAttribute("totalPrice")double totalPrice) {
-        map.put("cartItems", cartService.getCartItem());
+        map.put("cartItems", cartService.getCartItems());
         map.put("totalPrice", totalPrice);
         return "info";
     }*/
@@ -69,7 +81,7 @@ public class AuthController {
     /*@GetMapping("/info")
     public ModelAndView checkoutInfo(ModelMap map, @ModelAttribute("totalPrice")double totalPrice) {
         return new ModelAndView("info",
-                "cartItems", cartService.getCartItem());
+                "cartItems", cartService.getCartItems());
     }*/
 
     // with upper two methods are the same
@@ -77,7 +89,7 @@ public class AuthController {
     public ModelAndView checkoutInfo(ModelMap map,
                                      @ModelAttribute("totalPrice")double totalPrice) {
         ModelAndView mv = new ModelAndView();
-        mv.addObject("cartItems", cartService.getCartItem());
+        mv.addObject("cartItems", cartService.getCartItems());
         mv.addObject("totalPrice", totalPrice);
         mv.addObject("customerInfo",
                 authService.findCustomerInfoByCustomerName(customer.getCustomerName()));
@@ -89,17 +101,25 @@ public class AuthController {
     //auth/login
     @GetMapping("/login")
     public String login() {
-
-        return "login";
+        if (Objects.isNull(customer)) {
+            System.out.println("Login Page ......");
+            return "login";
+        }
+        else {
+            System.out.println("CustomerName : " + customer.getCustomerName());
+            customerService.saveCustomerOrderItems(customer);
+            return "login";
+        }
     }
 
     @ModelAttribute("totalPrice")
     public double totalAmount() {
-        return cartService
-                .getCartItem()
+        Optional<Double> optionalDouble = cartService
+                .getCartItems()
                 .stream()
                 .map(c -> c.getQuantity() * c.getPrice())
-                .reduce((a,b) -> a + b)
-                .get();
+                .reduce((a,b) -> a + b);
+        return optionalDouble.orElse(0.0);
     }
+
 }
